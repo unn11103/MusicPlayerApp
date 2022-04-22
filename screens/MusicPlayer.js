@@ -4,7 +4,7 @@ import React from 'react'
 const MusicPlayer = () => {
   return (
     <View>
-      <Text>React native MusicPlayer</Text>
+      <Text>React native music</Text>
     </View>
   )
 }
