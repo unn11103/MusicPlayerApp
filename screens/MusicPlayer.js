@@ -23,11 +23,13 @@ import TrackPlayer, {
 import Slider from '@react-native-community/slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import songs from '../model/Songs';
 
 const {width, height} = Dimensions.get('window');
 
-const setupPlayer = async () => {
+
+const setupPlayer = async (index) => {
   try {
     await TrackPlayer.setupPlayer();
     await TrackPlayer.updateOptions({
@@ -57,11 +59,12 @@ const togglePlayBack = async playBackState => {
   }
 };
 
-const MusicPlayer = () => {
+const MusicPlayer = ({navigation,route}) => {
+  const currentIndex = route.params.songId - 1;
   const playBackState = usePlaybackState();
   const progress = useProgress();
   //   custom states
-  const [songIndex, setsongIndex] = useState(0);
+  const [songIndex , setsongIndex] = useState(0);
   const [repeatMode, setRepeatMode] = useState('off');
   const [trackTitle, setTrackTitle] = useState();
   const [trackArtist, setTrackArtist] = useState();
@@ -118,10 +121,8 @@ const MusicPlayer = () => {
 
   useEffect(() => {
     setupPlayer();
-
     scrollX.addListener(({value}) => {
-      //   console.log(`ScrollX : ${value} | Device Width : ${width} `);
-
+         console.log(`ScrollX : ${value} | Device Width : ${width} `);
       const index = Math.round(value / width);
       skipTo(index);
       setsongIndex(index);
@@ -134,6 +135,8 @@ const MusicPlayer = () => {
       TrackPlayer.destroy();
     };
   }, []);
+
+
 
   const skipToNext = () => {
     songSlider.current.scrollToOffset({
