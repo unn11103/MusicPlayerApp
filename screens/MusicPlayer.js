@@ -156,7 +156,7 @@ const MusicPlayer = ({navigation,route}) => {
         <View style={[style.imageWrapper, style.elevation]}>
           <Image
             //   source={item.artwork}
-            source={trackArtwork}
+            source={{uri:trackArtwork}}
             style={style.musicImage}
           />
         </View>

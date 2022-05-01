@@ -7,7 +7,7 @@ const SongListView = ({navigation}) => {
   const oneSong = ({ item }) => (
     <View style={ styles.item }> 
       <View style={ styles.avatarContainer }>
-        <Image source={ item.artwork } style={ styles.avatar } />
+        <Image source={ {uri: item.artwork}} style={ styles.avatar } />
       </View>      
       <Text onPress={() => navigation.navigate('MusicPlayer',{'songId' : item.id})} style={ styles.name } > {item.title} </Text>
     </View>    
